@@ -1,0 +1,16 @@
+<!--miniprogram/pages/login/login.wxml-->
+<view class='content'>
+    <image
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"></image>
+
+    <view class='loginBn'>
+      <button
+        type='primary'
+        open-type="getUserInfo"
+        bindgetuserinfo="onGetUserInfo"
+        size='mini'>{{loginStr}}</button>
+    </view>
+</view>

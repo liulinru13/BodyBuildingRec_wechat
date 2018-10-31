@@ -4,10 +4,12 @@ const app = getApp()
 Page({
   data: {
     avatarUrl: './user-unlogin.png',
-    userInfo: {},
+    userInfo: null,
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    showUploadImg: false,
+    imgUrl: '',
   },
 
   onLoad: function() {
@@ -67,6 +69,13 @@ Page({
     })
   },
 
+  updatePicState: function(path,visiable) {
+    this.setData({
+      showUploadImg: visiable,
+      imgUrl: path
+    })
+  },
+
   // 上传图片
   doUpload: function () {
     // 选择图片
@@ -84,6 +93,7 @@ Page({
         
         // 上传图片
         const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
+        const that = this
         wx.cloud.uploadFile({
           cloudPath,
           filePath,
@@ -93,10 +103,11 @@ Page({
             app.globalData.fileID = res.fileID
             app.globalData.cloudPath = cloudPath
             app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
+            console.info(getCurrentPages()[0])
+            getCurrentPages[0].updatePicState(filePath,true)
+            // wx.navigateTo({
+            //   url: '../storageConsole/storageConsole'
+            // })
           },
           fail: e => {
             console.error('[上传文件] 失败：', e)
