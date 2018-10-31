@@ -6,11 +6,13 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": false,
+		"uglifyFileName": true
 	},
 	"appid": "wx78a27b6d505cdf2e",
 	"projectname": "BodyBuildREC",
-	"libVersion": "2.2.5",
+	"libVersion": "2.3.1",
 	"condition": {
 		"search": {
 			"current": -1,
