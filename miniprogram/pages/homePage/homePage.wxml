@@ -1,2 +1,14 @@
 <!--miniprogram/pages/homePage/homePage.wxml-->
-<text>miniprogram/pages/homePage/homePage.wxml</text>
+<view class="container">
+  <text>昵称：{{userName}}</text>
+  <div>
+    <view wx:if="{{trainObjs.length == 0}}">无记录</view>
+    <div wx:else>
+      <block class="train" wx:for="{{trainObjs}}">
+        <text>{{index}} : {{item.nickName}}</text>
+      </block>
+    </div>
+  </div>
+  <button class="next" size="mini" type="default" bindtap="insertTrain">增加记录</button>
+
+</view>

@@ -1,4 +1,6 @@
 // miniprogram/pages/login/login.js
+const app = getApp();
+
 Page({
 
   /**
@@ -27,12 +29,14 @@ Page({
                 userInfo: res.userInfo,
                 loginStr: '欢迎回来，点击开始',
                 logged: true,
-              })
+              });
+              app.globalData.userInfo = res.userInfo;
             }
-          })
+          });
         }
       }
-    })
+    });
+    this.getOpenId();
   },
 
   onGetUserInfo: function(e) {
@@ -42,10 +46,32 @@ Page({
         avatarUrl: e.detail.userInfo.avatarUrl,
         userInfo: e.detail.userInfo,
         loginStr: '欢迎回来，点击开始',
-      })
+      });
+      app.globalData.userInfo = e.detail.userInfo;
     }else{
       wx.navigateTo({
         url: '../homePage/homePage',
+      })
+    }
+  },
+
+  getOpenId: function() {
+    // 需检查是否有 openid，如无需获取
+    if (!app.globalData.openid) {
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {},
+        success: res => {
+          app.globalData.openid = res.result.openid;
+          console.info("获取到openid = " + res.result.openid);
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '获取 openid 失败，请检查是否有部署 login 云函数',
+          })
+          console.log('[云函数] [login] 获取 openid 失败，请检查是否有部署云函数，错误信息：', err)
+        }
       })
     }
   },
@@ -54,7 +80,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+  
   },
 
   /**

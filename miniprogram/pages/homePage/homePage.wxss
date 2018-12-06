@@ -1,1 +1,14 @@
 /* miniprogram/pages/homePage/homePage.wxss */
+
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.train {
+  flex-direction: row;
+  background: #ececec;
+  border: 1px solid #eb1b1b;
+}

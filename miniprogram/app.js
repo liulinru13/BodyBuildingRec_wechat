@@ -10,6 +10,9 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      userInfo: null,//用户信息
+      openid: null,//云函数调用需要
+    }
   }
 })
